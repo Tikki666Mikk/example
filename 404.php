@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/template_styles.css">
     <link rel="stylesheet" type="text/css" href="css/components.css">
+    <!--[if IE 9]>
+    <![endif]-->
 </head>
 <body>
-<div class="b-site">
-    <div class="b-header">
+<div class="b-site" itemscope itemtype="http://schema.org/WebPage">
+    <header class="b-header">
         <div class="container">
             <div class="top-menu clearfix">
                 <div class="logo">
@@ -17,10 +19,17 @@
                         Volunteers
                     </a>
                 </div>
+
                 <div class="auth-reg">
                     <?php
-                    if (isset($_SESSION['login'])) {
+                    if (isset($_SESSION['login']) && $_SESSION['admin'] = false) {
                         echo '<a href="profile.php" class="auth">
+                               ' . $_SESSION['login'] . '
+                           </a>';
+                    } elseif (isset($_SESSION['login']) && $_SESSION['admin'] = true) {
+                        echo '<a href="admin.php" class="auth">
+                               админка
+                           </a><a href="profile.php" class="auth">
                                ' . $_SESSION['login'] . '
                            </a>';
                     } else {
@@ -39,7 +48,7 @@
                     ?>
                 </div>
             </div>
-
+    
             <div class="mobile-slide-menu auth-reg">
                 <div class="row">
                     <div class="col-xs-6">
@@ -47,7 +56,7 @@
                             вход
                         </a>
                     </div>
-
+    
                     <div class="col-xs-6">
                         <a href="registration.php" class="reg">
                             регистрация
@@ -56,76 +65,77 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="b-fnf">
-        <div class="container">
-            <div class="h1">
-                404
-            </div>
-            <div class="desscription">
-                Данная страница не существует либо не доступна
-            </div>
-
-            <a href="index.php" class="btn">
-                Вернуться
-            </a>
+    </header>
+<div class="b-404">
+    <div class="container">
+        <div class="h1">
+            404
         </div>
-    </div>
-    <div class="b-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-md-6">
-                    <div class="logo">
-                        Volunteers
-                    </div>
-
-                    <div class="social">
-                        <a href="#" class="soc-icon fa fa-twitter">
-                        </a>
-
-                        <a href="#" class="soc-icon fa fa-vk">
-                        </a>
-
-                        <a href="#" class="soc-icon fa fa-whatsapp">
-                        </a>
-
-                        <a href="#" class="soc-icon fa fa-facebook">
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-xs-12 col-md-6">
-                    <div class="h2">
-                        Контакты
-                    </div>
-
-                    <ul>
-                        <li>
-                            Email: example@email.com
-                        </li>
-
-                        <li>
-                            Телефон: 8-800-555-35-35
-                        </li>
-
-                        <li>
-                            Адрес: г. Москва ул. Пушкина д. 12
-                        </li>
-                    </ul>
-                </div>
-            </div>
+        <div class="desscription">
+            Данная страница не существует либо не доступна
         </div>
 
-        <div class="bottom-line">
-            <div class="container">
-                <div class="copyright">
-                    &copy; Конюхов Данил, 2017 г.
-                </div>
-            </div>
-        </div>
+        <a href="index.php" class="btn">
+            Вернуться
+        </a>
     </div>
 </div>
-<script src="https://use.fontawesome.com/518e47326d.js"></script>
+<footer class="b-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <div class="logo">
+                    Volunteers
+                </div>
+
+                <div class="social">
+                    <a href="#" class="soc-icon fa fa-twitter">
+                    </a>
+
+                    <a href="#" class="soc-icon fa fa-vk">
+                    </a>
+
+                    <a href="#" class="soc-icon fa fa-whatsapp">
+                    </a>
+
+                    <a href="#" class="soc-icon fa fa-facebook">
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-6">
+                <div class="h2">
+                    Контакты
+                </div>
+
+                <ul>
+                    <li>
+                        Email: example@email.com
+                    </li>
+
+                    <li>
+                        Телефон: 8-800-555-35-35
+                    </li>
+
+                    <li>
+                        Адрес: г. Москва ул. Пушкина д. 12
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-line">
+        <div class="container">
+            <div class="copyright">
+                &copy; Конюхов Данил, 2017 г.
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
 <script src="js/main.js"></script>
+<!--[if IE 9]>
+<![endif]-->
 </body>
 </html>

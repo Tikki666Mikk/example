@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/template_styles.css">
     <link rel="stylesheet" type="text/css" href="css/components.css">
+    <!--[if IE 9]>
+    <![endif]-->
 </head>
 <body>
-<div class="b-site">
-    <div class="b-header">
+<div class="b-site" itemscope itemtype="http://schema.org/WebPage">
+    <header class="b-header">
         <div class="container">
             <div class="top-menu clearfix">
                 <div class="logo">
@@ -17,20 +19,33 @@
                         Volunteers
                     </a>
                 </div>
-    
+
                 <div class="auth-reg">
-    
+                    <?php
+                    if (isset($_SESSION['login']) && $_SESSION['admin'] = false) {
+                        echo '<a href="profile.php" class="auth">
+                               ' . $_SESSION['login'] . '
+                           </a>';
+                    } elseif (isset($_SESSION['login']) && $_SESSION['admin'] = true) {
+                        echo '<a href="admin.php" class="auth">
+                               админка
+                           </a><a href="profile.php" class="auth">
+                               ' . $_SESSION['login'] . '
+                           </a>';
+                    } else {
+                        echo '
                     <a href="#" class="btn-sandwich hidden-md-up">
                         <img src="images/header-sendwich.png" alt="#">
                     </a>
-    
                     <a href="authorization.php" class="auth hidden-sm-down">
                         вход
                     </a>
-    
                     <a href="registration.php" class="reg hidden-sm-down">
                         регистрация
                     </a>
+                ';
+                    }
+                    ?>
                 </div>
             </div>
     
@@ -50,7 +65,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </header>
 <div class="b-registration">
     <div class="container">
         <div class="row">
@@ -95,7 +110,7 @@
                                     Телефон *
                                 </label>
 
-                                <input required type="text" name="phone" class="input-field phone-field">
+                                <input required type="tel" name="phone" class="input-field phone-field">
                             </div>
                         </div>
 
@@ -105,7 +120,7 @@
                                     Пароль *
                                 </label>
 
-                                <input required type="text" name="password" class="input-field">
+                                <input required type="password" name="password" class="input-field">
                             </div>
 
                             <div class="input-group">
@@ -121,7 +136,7 @@
                                     Email *
                                 </label>
 
-                                <input required type="text" name="email" class="input-field">
+                                <input required type="email" name="email" class="input-field">
                             </div>
 
                             <div class="input-group">
@@ -156,7 +171,15 @@
         </div>
     </div>
 </div>
-<div class="b-footer">
+    <div class="b-popup">
+        <a href="#" class="popup login-exist">
+            <span class="close-popup">x</span>
+            Логин уже существует
+        </a>
+        <div class="overlay">
+        </div>
+    </div>
+<footer class="b-footer">
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-md-6">
@@ -208,10 +231,11 @@
             </div>
         </div>
     </div>
+</footer>
 </div>
-</div>
-<script src="https://use.fontawesome.com/518e47326d.js"></script>
 <script src="js/main.js"></script>
+<!--[if IE 9]>
+<![endif]-->
 </body>
 </html>
 
@@ -220,5 +244,4 @@ require_once ('registration.class.php');
 if (isset($_POST['send_reg'])) {
     $reg = new Registration();
     $reg->registration_user();
-    header('Location: index.php#success-registration');
 }

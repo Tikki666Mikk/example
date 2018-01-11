@@ -12,10 +12,12 @@ if (!isset($_SESSION['login'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/template_styles.css">
         <link rel="stylesheet" type="text/css" href="css/components.css">
+        <!--[if IE 9]>
+        <![endif]-->
     </head>
     <body>
-    <div class="b-site">
-        <div class="b-header">
+    <div class="b-site" itemscope itemtype="http://schema.org/WebPage">
+        <header class="b-header">
             <div class="container">
                 <div class="top-menu clearfix">
                     <div class="logo">
@@ -25,18 +27,31 @@ if (!isset($_SESSION['login'])) {
                     </div>
 
                     <div class="auth-reg">
-
-                        <a href="#" class="btn-sandwich hidden-md-up">
-                            <img src="images/header-sendwich.png" alt="#">
-                        </a>
-
-                        <a href="authorization.php" class="auth hidden-sm-down">
-                            вход
-                        </a>
-
-                        <a href="registration.php" class="reg hidden-sm-down">
-                            регистрация
-                        </a>
+                        <?php
+                        if (isset($_SESSION['login']) && $_SESSION['admin'] = false) {
+                            echo '<a href="profile.php" class="auth">
+                               ' . $_SESSION['login'] . '
+                           </a>';
+                        } elseif (isset($_SESSION['login']) && $_SESSION['admin'] = true) {
+                            echo '<a href="admin.php" class="auth">
+                               админка
+                           </a><a href="profile.php" class="auth">
+                               ' . $_SESSION['login'] . '
+                           </a>';
+                        } else {
+                            echo '
+                    <a href="#" class="btn-sandwich hidden-md-up">
+                        <img src="images/header-sendwich.png" alt="#">
+                    </a>
+                    <a href="authorization.php" class="auth hidden-sm-down">
+                        вход
+                    </a>
+                    <a href="registration.php" class="reg hidden-sm-down">
+                        регистрация
+                    </a>
+                ';
+                        }
+                        ?>
                     </div>
                 </div>
 
@@ -56,7 +71,7 @@ if (!isset($_SESSION['login'])) {
                     </div>
                 </div>
             </div>
-        </div>
+        </header>
 
         <?php
         if ($_SESSION['auth'] = false) {
@@ -84,7 +99,7 @@ if (!isset($_SESSION['login'])) {
                 </form>
             </div>
         </div>
-        <div class="b-footer">
+        <footer class="b-footer">
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-md-6">
@@ -136,10 +151,11 @@ if (!isset($_SESSION['login'])) {
                     </div>
                 </div>
             </div>
-        </div>
+        </footer>
     </div>
-    <script src="https://use.fontawesome.com/518e47326d.js"></script>
     <script src="js/main.js"></script>
+    <!--[if IE 9]>
+    <![endif]-->
     </body>
     </html>
 
@@ -151,4 +167,3 @@ if (!isset($_SESSION['login'])) {
         header('Location: index.php');
     }
 }
-?>
